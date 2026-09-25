@@ -1088,6 +1088,36 @@ def generate_page(default_tab):
       font-size: 11px;
       font-weight: 700;
       color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }}
+
+    .live-dot-pulse {{
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      animation: pulse-green 2s infinite;
+      display: inline-block;
+    }}
+
+    @keyframes pulse-green {{
+      0% {{
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      }}
+      70% {{
+        transform: scale(1);
+        box-shadow: 0 0 0 5px rgba(34, 197, 94, 0);
+      }}
+      100% {{
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+      }}
     }}
 
     /* Fluid scaling matching exact Top Sultan proportions on mobile */
@@ -1282,6 +1312,9 @@ def generate_page(default_tab):
       <!-- Footer Watermark -->
       <footer class="card-footer">
         <span>© 2026 xumu id · TikTok Leaderboard</span>
+        <span id="syncIndicator" style="display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 800; color: #16a34a; background: #dcfce7; padding: 1.5px 7px; border-radius: 999px; border: 1px solid #86efac;">
+          <span class="live-dot-pulse"></span> Firebase Live
+        </span>
       </footer>
     </article>
   </main>
@@ -1403,10 +1436,97 @@ def generate_page(default_tab):
       renderLeaderboard();
     }}
 
-    // 60 Days fixed period (no dropdown)
+    // ======================================================================
+    // FIREBASE REALTIME DATABASE SYNC (Path: /xumuid-dashboard/tiktok_leaderboard)
+    // ======================================================================
+    const FIREBASE_RTDB_URL = "https://xumuid-dashboard-default-rtdb.asia-southeast1.firebasedatabase.app/xumuid-dashboard/tiktok_leaderboard.json";
 
-    // Initial Render
+    function applyFirebaseUpdate(data) {{
+      if (!data) return;
+      let hasUpdate = false;
+      if (data.top_gifters && data.top_gifters.gifters && Array.isArray(data.top_gifters.gifters)) {{
+        giftersDatasets["60 days"]["total"] = data.top_gifters.gifters.map(g => ({{
+          rank: g.rank,
+          name: g.display_name || g.username,
+          amount: `${{Number(g.coins).toLocaleString()}} Coins`,
+          badge: g.badge || '',
+          avatar: g.avatar || ''
+        }}));
+        hasUpdate = true;
+      }}
+      if (data.penonton_setia && data.penonton_setia.viewers && Array.isArray(data.penonton_setia.viewers)) {{
+        viewersDatasets["60 days"]["total"] = data.penonton_setia.viewers.map(v => ({{
+          rank: v.rank,
+          name: v.display_name || v.username,
+          amount: v.watch_time_str || `${{Math.round(v.watch_time_minutes / 60)}}h`,
+          badge: v.badge || '',
+          avatar: v.avatar || ''
+        }}));
+        hasUpdate = true;
+      }}
+      if (hasUpdate) {{
+        renderLeaderboard();
+        const ind = document.getElementById('syncIndicator');
+        if (ind) {{
+          ind.style.display = 'inline-flex';
+          ind.title = 'Terhubung & Sinkron Realtime dengan Firebase';
+        }}
+      }}
+    }}
+
+    function initFirebaseLiveSync() {{
+      // 1. Initial REST Fetch for instant freshness
+      fetch(FIREBASE_RTDB_URL)
+        .then(res => res.json())
+        .then(data => {{
+          if (data) applyFirebaseUpdate(data);
+        }})
+        .catch(err => console.log('Firebase fetch fallback active'));
+
+      // 2. Realtime SSE Stream (push updates directly on change)
+      if (typeof EventSource !== 'undefined') {{
+        try {{
+          const sse = new EventSource(FIREBASE_RTDB_URL);
+          sse.addEventListener('put', function(e) {{
+            try {{
+              const res = JSON.parse(e.data);
+              if (res && res.data) {{
+                applyFirebaseUpdate(res.data);
+              }}
+            }} catch(err) {{}}
+          }});
+          sse.addEventListener('patch', function(e) {{
+            try {{
+              const res = JSON.parse(e.data);
+              if (res && res.data) {{
+                applyFirebaseUpdate(res.data);
+              }}
+            }} catch(err) {{}}
+          }});
+          sse.onerror = function() {{
+            // Automatic reconnection handled by browser
+          }};
+        }} catch(e) {{
+          console.warn('SSE unsupported:', e);
+        }}
+      }}
+
+      // 3. Tab focus auto-refresh
+      document.addEventListener('visibilitychange', function() {{
+        if (!document.hidden) {{
+          fetch(FIREBASE_RTDB_URL)
+            .then(res => res.json())
+            .then(data => {{ if (data) applyFirebaseUpdate(data); }})
+            .catch(() => {{}});
+        }}
+      }});
+    }}
+
+    // Initial Local Render
     renderLeaderboard();
+
+    // Start Live Sync
+    initFirebaseLiveSync();
   </script>
 </body>
 </html>'''
