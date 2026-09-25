@@ -1,0 +1,110 @@
+{
+  "updated_at": "2026-09-25T19:00:00+07:00",
+  "channel": "@xumuid",
+  "source": "https://livecenter.tiktok.com/rank_list?lang=en",
+  "filter": "60_days",
+  "viewers": [
+    {
+      "rank": 1,
+      "username": "zheva",
+      "display_name": "zheva",
+      "watch_time_str": "70h 25m",
+      "watch_time_minutes": 4225,
+      "badge": "🧡 xumu",
+      "badge_type": "fan_club",
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7366666666666666666~c5_100x100.jpeg?x-expires=1740000000&x-signature=demo"
+    },
+    {
+      "rank": 2,
+      "username": "user14090625",
+      "display_name": "user14090625",
+      "watch_time_str": "68h 43m",
+      "watch_time_minutes": 4123,
+      "badge": "🧡 xumu",
+      "badge_type": "fan_club",
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7338902518534897669~c5_100x100.jpeg?x-expires=1740000000&x-signature=demo"
+    },
+    {
+      "rank": 3,
+      "username": "FX.W7M",
+      "display_name": "FX.W7M",
+      "watch_time_str": "48h 28m",
+      "watch_time_minutes": 2908,
+      "badge": "🧡 xumu",
+      "badge_type": "fan_club",
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7377777777777777777~c5_100x100.jpeg?x-expires=1740000000&x-signature=demo"
+    },
+    {
+      "rank": 4,
+      "username": "BG RAAA 🚀🚀🚀",
+      "display_name": "BG RAAA 🚀🚀🚀",
+      "watch_time_str": "28h 48m",
+      "watch_time_minutes": 1728,
+      "badge": "🤍 xumu",
+      "badge_type": "fan_club_silver",
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7388888888888888888~c5_100x100.jpeg?x-expires=1740000000&x-signature=demo"
+    },
+    {
+      "rank": 5,
+      "username": "muh_ilham_1",
+      "display_name": "muh_ilham_1",
+      "watch_time_str": "21h 11m",
+      "watch_time_minutes": 1271,
+      "badge": null,
+      "badge_type": null,
+      "avatar": null,
+      "avatar_text": "B",
+      "avatar_bg": "#ec4899"
+    },
+    {
+      "rank": 6,
+      "username": "Kairi Pontianak",
+      "display_name": "Kairi Pontianak",
+      "watch_time_str": "19h 33m",
+      "watch_time_minutes": 1173,
+      "badge": "🧡 xumu",
+      "badge_type": "fan_club",
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7355555555555555555~c5_100x100.jpeg?x-expires=1740000000&x-signature=demo"
+    },
+    {
+      "rank": 7,
+      "username": "Phiu",
+      "display_name": "Phiu",
+      "watch_time_str": "16h 40m",
+      "watch_time_minutes": 1000,
+      "badge": "🧡 xumu",
+      "badge_type": "fan_club",
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7345678912345678901~c5_100x100.jpeg?x-expires=1740000000&x-signature=demo"
+    },
+    {
+      "rank": 8,
+      "username": "MASDDY",
+      "display_name": "MASDDY",
+      "watch_time_str": "14h 15m",
+      "watch_time_minutes": 855,
+      "badge": null,
+      "badge_type": null,
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7312345678901234567~c5_100x100.jpeg?x-expires=1740000000&x-signature=demo"
+    },
+    {
+      "rank": 9,
+      "username": "Hyzen",
+      "display_name": "Hyzen",
+      "watch_time_str": "11h 05m",
+      "watch_time_minutes": 665,
+      "badge": null,
+      "badge_type": null,
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7398765432109876543~c5_100x100.jpeg?x-expires=1740000000&x-signature=demo"
+    },
+    {
+      "rank": 10,
+      "username": "Ncann",
+      "display_name": "Ncann",
+      "watch_time_str": "8h 30m",
+      "watch_time_minutes": 510,
+      "badge": "🧡 xumu",
+      "badge_type": "fan_club",
+      "avatar": "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/7399999999999999999~c5_100x100.jpeg?x-expires=1740000000&x-signature=demo"
+    }
+  ]
+}
